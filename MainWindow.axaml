@@ -1,0 +1,56 @@
+<Window 
+	xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ScottPlot="clr-namespace:ScottPlot.Avalonia;assembly=ScottPlot.Avalonia"
+  mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+  x:Class="PredatorPrey.MainWindow"
+  Title="PredatorPrey"
+	MinWidth="600" MinHeight="600">
+	<Grid ColumnDefinitions="*,*">
+		<Grid ColumnDefinitions="*,*">
+			<TextBlock 
+				Name="ErrorMessage" 
+				Foreground="Red" 
+				TextWrapping="Wrap"
+				Margin="8"/>
+			<StackPanel
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			Margin="8">
+				<TextBlock TextWrapping="Wrap" Margin="8">
+					x - изначальное количество жертв
+				</TextBlock>
+				<TextBox Name="X0" Watermark="x0" Text="0"/>
+				<TextBlock TextWrapping="Wrap" Margin="8">
+					γ - коэффициент роста жертв
+				</TextBlock>
+				<TextBox Name="Gamma" Watermark="γ" Text="1,2"/>
+				<TextBlock TextWrapping="Wrap" Margin="8">
+					α - коэффициент гибели за счёт встречи жертвы с хищником
+				</TextBlock>
+				<TextBox Name="Alpha" Watermark="α" Text="0,02"/>
+			</StackPanel>
+			<StackPanel 
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				Grid.Column="1"
+				Margin="8">
+				<TextBlock TextWrapping="Wrap" Margin="8">
+					y - изначальное количество хищников
+				</TextBlock>
+				<TextBox Name="Y0" Watermark="y0" Text="0"/>
+				<TextBlock TextWrapping="Wrap" Margin="8">
+					δ - коэффициент роста хищников
+				</TextBlock>
+				<TextBox Name="Delta" Watermark="δ" Text="0,0001"/>
+				<TextBlock TextWrapping="Wrap" Margin="8">
+					β - коэффициент естественной гибели хищников
+				</TextBlock>
+				<TextBox Name="Beta" Watermark="β" Text="0,35"/>
+			</StackPanel>
+		</Grid>
+		<ScottPlot:AvaPlot Grid.Column="1" Name="Plot"/>
+	</Grid>
+</Window>
