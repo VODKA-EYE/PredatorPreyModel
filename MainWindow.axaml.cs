@@ -2,12 +2,20 @@
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PredatorPrey
 {
   public partial class MainWindow : Window
   {
     double x0, y0, alpha, beta, delta, gamma;
+    class Table
+    {
+      public int StageNumber { get; set; }
+      public double Prey { get; set; } 
+      public double Predators { get; set; }
+    }
     public MainWindow()
     {
       InitializeComponent();
@@ -24,6 +32,7 @@ namespace PredatorPrey
       Plot.Plot.Clear();
       double[] prey = new double[151];
       double[] predators = new double[151];
+      List<Table> table = new();
       prey[0] = x0;
       predators[0] = y0;
       if (alpha != null && beta != null && delta != null && gamma != null)
@@ -32,7 +41,16 @@ namespace PredatorPrey
         {
           prey[i + 1] = (gamma - alpha * predators[i]) * prey[i] + prey[i];
           predators[i + 1] = (delta * prey[i + 1] - beta) * predators[i] + predators[i];
+
+          Table row = new Table();
+          row.StageNumber = i + 1;
+          row.Prey = prey[i + 1];
+          row.Predators = predators[i + 1];
+
+          table.Add(row);
         }
+        ListBox.ItemsSource = table;
+
         Plot.Plot.Add.Scatter(prey, predators);
         Plot.Refresh();
       }

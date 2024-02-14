@@ -9,16 +9,18 @@
   Title="PredatorPrey"
 	MinWidth="600" MinHeight="600">
 	<Grid ColumnDefinitions="*,*">
-		<Grid ColumnDefinitions="*,*">
+		<Grid ColumnDefinitions="*,*" RowDefinitions="auto,auto,*">
 			<TextBlock 
 				Name="ErrorMessage" 
 				Foreground="Red" 
 				TextWrapping="Wrap"
-				Margin="8"/>
+				Margin="8"
+				/>
 			<StackPanel
 			HorizontalAlignment="Center"
 			VerticalAlignment="Center"
-			Margin="8">
+			Margin="8"
+			Grid.Row="1">
 				<TextBlock TextWrapping="Wrap" Margin="8">
 					x - изначальное количество жертв
 				</TextBlock>
@@ -36,7 +38,8 @@
 				HorizontalAlignment="Center"
 				VerticalAlignment="Center"
 				Grid.Column="1"
-				Margin="8">
+				Margin="8"
+				Grid.Row="1">
 				<TextBlock TextWrapping="Wrap" Margin="8">
 					y - изначальное количество хищников
 				</TextBlock>
@@ -50,6 +53,34 @@
 				</TextBlock>
 				<TextBox Name="Beta" Watermark="β" Text="0,35"/>
 			</StackPanel>
+			<Grid
+				Grid.ColumnSpan="2"
+				Grid.Row="2"
+				Margin="8"
+				ColumnDefinitions="32,*,*"
+				RowDefinitions="auto,*">
+				<TextBlock Text="№" Margin="8"/>
+				<TextBlock Text="Жертвы" Grid.Column="1" Margin="8"/>
+				<TextBlock Text="Хищники" Grid.Column="2" Margin="8"/>
+				<ListBox
+				Name="ListBox"
+				ItemsSource="{Binding}"
+				Grid.ColumnSpan="3"
+				Grid.Row="1">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<Border>
+								<Grid ColumnDefinitions="32,*,*">
+									<TextBlock Text="{Binding Path=StageNumber}"/>
+									<TextBlock Text="{Binding Path=Prey}" Grid.Column="1"/>
+									<TextBlock Text="{Binding Path=Predators}" Grid.Column="2"/>
+								</Grid>
+							</Border>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</Grid>
+			
 		</Grid>
 		<ScottPlot:AvaPlot Grid.Column="1" Name="Plot"/>
 	</Grid>
